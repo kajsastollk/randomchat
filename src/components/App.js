@@ -11,6 +11,7 @@ class App extends Component {
 
   componentDidMount() {
     this.auth();
+    this.pushChatMsg();
   }
 
   //auth with Gmail account
@@ -40,8 +41,24 @@ class App extends Component {
   pushChatMsg = (chatMsg) => {
     firebase.database()
       .ref('/messages')
-      .set({ ...chatMsg, createdBy: this.state.user.email });
+      //working! right syntax. not yet working with this.state.user.email
+      .set({
+        chat1: {
+          chatMsg: "chattingchattting",
+          createdBy: "person2",
+        },
+        chat2: {
+          chatMsg: "blablabla",
+          createdBy: "person1",
+        },
+        chat3: {
+          chatMsg: "hejhej",
+          createdBy: "person2",
+        }
+      });
+    //.set({ ...chatMsg, createdBy: this.state.user.email });
   }
+
 
   render() {
     console.log(this.state.user);
@@ -49,6 +66,7 @@ class App extends Component {
 
     const chatConversation = messages.map(chatMsg => (
       <div className="chatConversation">
+        {chatMsg}
       </div>
     ));
 
@@ -64,18 +82,22 @@ class App extends Component {
           <button onClick={this.login} type="submit" name="loginBtn">Google Login</button>
         </div>
         {this.state.user && this.state.user.email}
-        <div className="chat">
-          <form>
-            <label htmlFor="inputMsg">Start chatting now!</label>
-            <br />
-            <input type="text" name="inputMsg" className="inputBox" />
-            <button type="submit">Send</button>
-          </form>
-          <div className="prevMsg">
-            <p>Hej</p>
-          </div>
-        </div>
+        {chatConversation}
       </div >
+      /**
+       * <div className="chat">
+              <form>
+                <label htmlFor="inputMsg">Start chatting now!</label>
+                <br />
+                <input type="text" name="inputMsg" className="inputBox" />
+                <button type="submit">Send</button>
+              </form>
+              <div className="prevMsg">
+                <p>Hej</p>
+              </div>
+            </div>
+       * */
+
     );
   }
 }
