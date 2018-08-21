@@ -1,3 +1,21 @@
+* {
+  box-sizing: border-box;
+}
+
+.login {
+padding: 20px;
+}
+
+.chat {
+padding: 20px;
+}
+
+
+.prevMsg {
+border-top:2px;
+border-top-color: #222
+}
+
 .App {
   text-align: center;
 }
@@ -20,9 +38,4 @@
 
 .App-intro {
   font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
